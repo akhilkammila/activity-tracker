@@ -5,6 +5,7 @@ import collections
 from config import TWILIO_SID, TWILIO_TOKEN, TWILIO_NUMBER, TARGET_NUMBER
 from twilio.rest import Client
 import datetime
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 def get_time_spent():
     # Get the time spent data, aggregate it in a dictionary
@@ -43,7 +44,7 @@ def get_time_spent():
     send_text(contributors, titles, round(total/60, precision))
 
 def send_text(contributors, titles, total):
-    send_text = True
+    send_text = False
 
     # Prepare messages
     today = datetime.date.today()
@@ -66,3 +67,6 @@ def send_text(contributors, titles, total):
                     to=TARGET_NUMBER)
 
 get_time_spent()
+scheduler = BlockingScheduler()
+scheduler.add_job(get_time_spent, 'cron', hour='06-07', minute='20, 21, 22,23,24', start_date='2022-01-12 12:00:00', timezone='America/Chicago')
+scheduler.start()
