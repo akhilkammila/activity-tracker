@@ -67,6 +67,6 @@ def send_text(contributors, titles, total):
                     to=TARGET_NUMBER)
 
 get_time_spent()
-scheduler = BlockingScheduler()
-scheduler.add_job(get_time_spent, 'cron', hour='06-07', minute='20, 21, 22,23,24', start_date='2022-01-12 12:00:00', timezone='America/Chicago')
-scheduler.start()
+# scheduler = BlockingScheduler()
+# scheduler.add_job(get_time_spent, 'cron', hour='06-07', minute='20, 21, 22,23,24', start_date='2022-01-12 12:00:00', timezone='America/Chicago')
+# scheduler.start()
